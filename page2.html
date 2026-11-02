@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EXAM SPHERE - Student Exam</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            margin: 0;
+            padding: 25px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #cccccc;
+        }
+
+        h1 {
+            text-align: center;
+            color: #243b55;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            box-sizing: border-box;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 260px;
+            background: #17212b;
+            color: white;
+            font-family: Consolas, monospace;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 13px 25px;
+            background: #087fdb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .details, .result {
+            margin-top: 25px;
+            padding: 18px;
+            background: #f1f6fb;
+            border-radius: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>EXAM SPHERE</h1>
+    <h2>Student Details</h2>
+
+    <label>Student Name</label>
+    <input type="text" id="studentName" placeholder="Enter your name">
+
+    <label>Student ID Number</label>
+    <input type="text" id="studentId" placeholder="Enter student ID">
+
+    <label>Branch</label>
+    <select id="branch">
+        <option value="">Select Branch</option>
+        <option>CSE</option>
+        <option>ECE</option>
+        <option>EEE</option>
+        <option>IT</option>
+        <option>MECH</option>
+        <option>CIVIL</option>
+    </select>
+
+    <label>Year</label>
+    <select id="year">
+        <option value="">Select Year</option>
+        <option>1st Year</option>
+        <option>2nd Year</option>
+        <option>3rd Year</option>
+        <option>4th Year</option>
+    </select>
+
+    <h2>Java Code Editor</h2>
+
+    <label>Enter Your Java Code</label>
+
+    <textarea id="javaCode" placeholder="Write your Java code here..."></textarea>
+
+    <button onclick="checkCode()">Check Java Code</button>
+
+    <div class="details">
+        <h2>Student Details Submitted</h2>
+        <p><b>Name:</b> <span id="showName">Not entered</span></p>
+        <p><b>Student ID:</b> <span id="showId">Not entered</span></p>
+        <p><b>Branch:</b> <span id="showBranch">Not entered</span></p>
+        <p><b>Year:</b> <span id="showYear">Not entered</span></p>
+
+        <h3>Complete Java Code</h3>
+        <pre id="showCode">No code entered</pre>
+    </div>
+
+    <div class="result">
+        <h2>Java Code Result</h2>
+        <p id="resultText">Your result will appear here.</p>
+    </div>
+
+</div>
+
+<script>
+    function checkCode() {
+
+        let name = document.getElementById("studentName").value;
+        let id = document.getElementById("studentId").value;
+        let branch = document.getElementById("branch").value;
+        let year = document.getElementById("year").value;
+        let code = document.getElementById("javaCode").value;
+
+        // Display all student details
+        document.getElementById("showName").textContent = name || "Not entered";
+        document.getElementById("showId").textContent = id || "Not entered";
+        document.getElementById("showBranch").textContent = branch || "Not entered";
+        document.getElementById("showYear").textContent = year || "Not entered";
+
+        // Display complete Java code
+        document.getElementById("showCode").textContent =
+            code || "No code entered";
+
+        // Basic input checks only — not actual Java compilation
+        let result = document.getElementById("resultText");
+
+        if (!name || !id || !branch || !year || !code.trim()) {
+            result.textContent = "Please enter all student details and Java code.";
+            return;
+        }
+
+        if (!code.includes("class") || !code.includes("main")) {
+            result.textContent =
+                "Code needs checking: a Java class or main method may be missing. This is not a compiler result.";
+        } else {
+            result.textContent =
+                "Java code received successfully. Student details and complete code are displayed above. Connect a Java compiler service for actual error checking.";
+        }
+    }
+</script>
+
+</body>
+</html>
